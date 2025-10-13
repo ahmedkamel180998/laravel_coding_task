@@ -160,3 +160,23 @@ The application will be available at `http://localhost:8000`
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Web Routes
+
+### Public Routes
+
+```php
+GET / - Welcome page
+POST /login - Login page
+```
+
+### Admin Routes (Requires Admin Role)
+
+```php
+GET /admin/dashboard - Admin dashboard
+GET /admin/users/export - Export users to Excel
+```
+
+### Authentication Required
+
+All routes except the public routes require authentication. Admin routes additionally require the user to have an admin role.

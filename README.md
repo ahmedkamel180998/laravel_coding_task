@@ -170,6 +170,11 @@ GET / - Welcome page
 POST /login - Login page
 ```
 
+## User Credentials
+
+-   Email: Sincere@april.biz
+-   Password: 12345678
+
 ### Admin Routes (Requires Admin Role)
 
 ```php
@@ -177,6 +182,11 @@ GET /admin/dashboard - Admin dashboard
 GET /admin/users/export - Export users to Excel
 ```
 
+## Additional Admin Credentials
+
 ### Authentication Required
 
 All routes except the public routes require authentication. Admin routes additionally require the user to have an admin role.
+
+-   Email: Julianne.OConner@kory.org
+-   Password: 12345678

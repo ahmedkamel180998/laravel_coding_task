@@ -36,14 +36,12 @@ class UserAuthController extends Controller
             return ApiResponse::sendResponse(422, 'Register Validation Error', $validator->messages()->all());
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        $data['token'] = $user->createToken('auth_token')->plainTextToken;
-        $data['name'] = $user->name;
-        $data['email'] = $user->email;
+        // return ApiResponse::sendResponse(201, 'User Registered Successfully', $validator);
+        $data = $validator->safe()->only(['name', 'email', 'password']);
+        $data['password'] = Hash::make($data['password']);
+
+        $user = User::create($data);
+        $data['token'] = $user->createToken('auth_token_register')->plainTextToken;
 
         return ApiResponse::sendResponse(201, 'User Registered Successfully', $data);
     }
@@ -68,7 +66,7 @@ class UserAuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $data['token'] = $user->createToken('auth_token')->plainTextToken;
+            $data['token'] = $user->createToken('auth_token_login')->plainTextToken;
             $data['name'] = $user->name;
             $data['email'] = $user->email;
             return ApiResponse::sendResponse(200, 'User Logged In Successfully', $data);
